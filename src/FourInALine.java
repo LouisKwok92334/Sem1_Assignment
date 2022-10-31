@@ -4,6 +4,7 @@
    Description:	Four-in-a-Line is a two-players game.
 */
 import java.util.Scanner;
+
 public class FourInALine {
     public static void main( String[] args ) {
         Scanner input = new Scanner(System.in);
@@ -28,6 +29,7 @@ public class FourInALine {
             }
         }
     }
+   
     public static void drawGrid(int[][] mTable) {
         for (int x = mTable.length - 1; x >= 0; x--) { //Show the current game progress
             System.out.format("%4d |", x);
@@ -43,6 +45,7 @@ public class FourInALine {
         }
         System.out.println();
     }
+   
     public static boolean getError(int column, int[][] mTable) {
         if (column < 0 || column > 6) { //Do not enter numbers other than 0 to 6
             System.out.println("Range of column should be 0 to 6!");
@@ -53,8 +56,10 @@ public class FourInALine {
         }
         return false;
     }
+   
     public static boolean checkWin(int column, int[][] mTable, int playerNumber) {
         int columnWin = 0, rowWin = 0, leftSlashWin = 0, rightSlashWin = 0, checkFull = 0;
+       
         for (int x = 0; x <= mTable.length; x++) { //If the column is not full, it can be entered
             if(mTable[x][column] == 0) {
                 mTable[x][column] = playerNumber;
