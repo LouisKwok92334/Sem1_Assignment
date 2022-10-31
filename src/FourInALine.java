@@ -82,10 +82,6 @@ public class FourInALine {
             for (int y = 0; y < mTable[x].length; y++) { //Determine if anyone wins on the rows
                 if (mTable[x][y] != 0) {
                     checkFull++;
-                    if (checkFull >= mTable.length * mTable[mTable.length - 1].length) {
-                        System.out.println("No player win this game!");
-                        return true;
-                    }
                 }
                 if (mTable[x][y] == playerNumber) {
                     rowWin++;
@@ -127,6 +123,10 @@ public class FourInALine {
                     }
                 }
             }
+        }
+        if (checkFull >= mTable.length * mTable[mTable.length - 1].length) {
+            System.out.println("No player win this game!");
+            return true;
         }
         return false;
     }
