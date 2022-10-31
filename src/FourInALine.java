@@ -30,8 +30,8 @@ public class FourInALine {
         }
     }
    
-    public static void drawGrid(int[][] mTable) {
-        for (int x = mTable.length - 1; x >= 0; x--) { //Show the current game progress
+    public static void drawGrid(int[][] mTable) { //Show the current game progress
+        for (int x = mTable.length - 1; x >= 0; x--) {
             System.out.format("%4d |", x);
             for (int y = 0; y < mTable[x].length; y++) {
                 System.out.format("%4d", mTable[x][y]);
@@ -46,7 +46,7 @@ public class FourInALine {
         System.out.println();
     }
    
-    public static boolean getError(int column, int[][] mTable) {
+    public static boolean getError(int column, int[][] mTable) { //Show the Error
         if (column < 0 || column > 6) { //Do not enter numbers other than 0 to 6
             System.out.println("Range of column should be 0 to 6!");
             return true;
