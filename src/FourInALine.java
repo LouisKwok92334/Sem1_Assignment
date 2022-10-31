@@ -10,53 +10,30 @@ public class FourInALine {
         Scanner input = new Scanner(System.in);
 
         int [] [] mTable = new int [6] [7];
-        int playerNumber, column = 0, columnWin = 0, rowWin = 0, leftSlashWin = 0, rightSlashWin = 0, checkFull;
-        boolean startGame = false, player = true, game = true;
+        int columnWin = 0, rowWin = 0, leftSlashWin = 0, rightSlashWin = 0;
+        boolean player = true, game = true;
+        drawGrid(mTable);
 
         while (true) { //Start Game
-            playerNumber = player ? 1 : 2; //Change player number
-            checkFull = 0; //Count how many locations are used
+            int playerNumber = player ? 1 : 2; //Change player number
+            int checkFull = 0; //Count how many locations are used
 
-            if (startGame) { //This is implemented only after the game's framework has been shown once
-                System.out.print("Player " + playerNumber + " type a column (0-6) or 9 to quit current game: ");
-                column = input.nextInt(); //Enter the number of columns you want to put in
+            System.out.print("Player " + playerNumber + " type a column (0-6) or 9 to quit current game: ");
+            int column = input.nextInt(); //Enter the number of columns you want to put in
 
-                if (column == 9) { //If you type 9, the game ends
-                    System.out.println("Bye Bye!");
-                    break;
-                } else if (column < 0 || column > 6) { //Do not enter numbers other than 0 to 6
-                    System.out.println("Range of column should be 0 to 6!");
-                    continue;
-                } else if (mTable[mTable.length - 1][column] != 0) { //If the column is full, you cannot enter anymore
-                    System.out.println("Column " + column + " is full!");
-                    continue;
-                } else {
-                    for (int x = 0; x <= mTable.length; x++) { //If the column is not full, it can be entered
-                        if(mTable[x][column] == 0) {
-                            mTable[x][column] = playerNumber;
-                            break;
-                        }
+            if (column == 9) { //If you type 9, the game ends
+                System.out.println("Bye Bye!");
+                break;
+            } else if (getError(column, mTable)) {
+                continue;
+            } else {
+                for (int x = 0; x <= mTable.length; x++) { //If the column is not full, it can be entered
+                    if(mTable[x][column] == 0) {
+                        mTable[x][column] = playerNumber;
+                        drawGrid(mTable);
+                        break;
                     }
                 }
-            }
-
-            for (int x = mTable.length - 1; x >= 0; x--) { //Show the current game progress
-                System.out.format("%4d |", x);
-                for (int y = 0; y < mTable[x].length; y++) {
-                    System.out.format("%4d", mTable[x][y]);
-                }
-                System.out.println();
-            }
-            System.out.println("         -------------------------");
-            System.out.format("      ");
-            for (int x = 0; x <= mTable.length; x++) {
-                System.out.format("%4d", x);
-            }
-            System.out.println();
-
-            if (!startGame) { //When start game, show the frame of the game once
-                startGame = true;
-                continue;
             }
 
             for (int x = 0; x < mTable.length; x++) { //Determine if anyone wins on the columns
@@ -133,5 +110,30 @@ public class FourInALine {
                 break;
             }
         }
+    }
+    public static void drawGrid(int[][] mTable) {
+        for (int x = mTable.length - 1; x >= 0; x--) { //Show the current game progress
+            System.out.format("%4d |", x);
+            for (int y = 0; y < mTable[x].length; y++) {
+                System.out.format("%4d", mTable[x][y]);
+            }
+            System.out.println();
+        }
+        System.out.println("         -------------------------");
+        System.out.format("      ");
+        for (int x = 0; x <= mTable.length; x++) {
+            System.out.format("%4d", x);
+        }
+        System.out.println();
+    }
+    public static boolean getError(int column, int[][] mTable) {
+        if (column < 0 || column > 6) { //Do not enter numbers other than 0 to 6
+            System.out.println("Range of column should be 0 to 6!");
+            return true;
+        } else if (mTable[mTable.length - 1][column] != 0) { //If the column is full, you cannot enter anymore
+            System.out.println("Column " + column + " is full!");
+            return true;
+        }
+        return false;
     }
 }
