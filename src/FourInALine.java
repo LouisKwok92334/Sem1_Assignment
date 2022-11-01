@@ -14,22 +14,22 @@ public class FourInALine {
         drawGrid(mTable);
 
         while (true) { //Start Game
-            int playerNumber = player ? 1 : 2;
+            int column, playerNumber = player ? 1 : 2;
             System.out.print("Player " + playerNumber + " type a column (0-6) or 9 to quit current game: ");
-            int column = input.nextInt(); //Enter the number of columns you want to put in
+            column = input.nextInt(); //Enter the number of columns you want to put in
 
             if (column == 9) { //If you type 9, the game ends
                 System.out.println("Bye Bye!");
                 break;
             } else if (!getError(column, mTable)) {
-                if(checkWin(column, mTable, playerNumber)) {
+                if (checkWin(column, mTable, playerNumber)) {
                     break;
                 }
                 player = !player; //Change player
             }
         }
     }
-   
+
     public static void drawGrid(int[][] mTable) { //Show the current game progress
         for (int x = mTable.length - 1; x >= 0; x--) {
             System.out.format("%4d |", x);
