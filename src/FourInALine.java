@@ -20,7 +20,7 @@ public class FourInALine {
             String inputMsg = input.nextLine();
             try {
                 column = Integer.parseInt(inputMsg);
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 System.out.println("Invalid input!");
                 continue;
             }
