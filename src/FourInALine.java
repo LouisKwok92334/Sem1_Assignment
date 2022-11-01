@@ -16,7 +16,14 @@ public class FourInALine {
         while (true) { //Start Game
             int column, playerNumber = player ? 1 : 2;
             System.out.print("Player " + playerNumber + " type a column (0-6) or 9 to quit current game: ");
-            column = input.nextInt(); //Enter the number of columns you want to put in
+
+            String inputMsg = input.nextLine();
+            try {
+                column = Integer.parseInt(inputMsg);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input!");
+                continue;
+            }
 
             if (column == 9) { //If you type 9, the game ends
                 System.out.println("Bye Bye!");
