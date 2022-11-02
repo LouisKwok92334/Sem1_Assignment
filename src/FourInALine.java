@@ -14,25 +14,22 @@ public class FourInALine {
         drawGrid(mTable);
 
         while (true) { //Start Game
-            int column, playerNumber = player ? 1 : 2;
-
+            int playerNumber = player ? 1 : 2;
             System.out.print("Player " + playerNumber + " type a column (0-6) or 9 to quit current game: ");
             String inputMsg = input.nextLine();
             try {
-                column = Integer.parseInt(inputMsg);
+                int column = Integer.parseInt(inputMsg);
+                if (column == 9) { //If you type 9, the game ends
+                    System.out.println("Bye Bye!");
+                    break;
+                } else if (!getError(column, mTable)) {
+                    if (checkWin(column, mTable, playerNumber)) {
+                        break;
+                    }
+                    player = !player; //Change player
+                }
             } catch (Exception e) {
                 System.out.println("Invalid input!");
-                continue;
-            }
-
-            if (column == 9) { //If you type 9, the game ends
-                System.out.println("Bye Bye!");
-                break;
-            } else if (!getError(column, mTable)) {
-                if (checkWin(column, mTable, playerNumber)) {
-                    break;
-                }
-                player = !player; //Change player
             }
         }
     }
@@ -66,7 +63,6 @@ public class FourInALine {
    
     public static boolean checkWin(int column, int[][] mTable, int playerNumber) {
         int columnWin = 0, rowWin = 0, leftSlashWin = 0, rightSlashWin = 0, checkFull = 0;
-       
         for (int x = 0; x <= mTable.length; x++) { //If the column is not full, it can be entered
             if(mTable[x][column] == 0) {
                 mTable[x][column] = playerNumber;
