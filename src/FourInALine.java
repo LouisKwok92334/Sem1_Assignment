@@ -1,6 +1,8 @@
 /*
    Filename: FourInALine.java
-   Programmer:  Kwok Pui Nam
+   Programmer: KwokPuiNam
+   Class: 1C
+   Student Number: 220007374
    Description:	Four-in-a-Line is a two-players game.
 */
 import java.util.Scanner;
