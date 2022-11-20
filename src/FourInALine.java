@@ -130,7 +130,7 @@ public class FourInALine {
             }
         }
         if (checkFull >= mTable.length * mTable[mTable.length - 1].length) {
-            System.out.println("No player win this game!");
+            System.out.println("Draw!");
             return true;
         }
         return false;
